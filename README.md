@@ -1,4 +1,4 @@
-# docdex
+# mddex
 
 Which file should you read?
 
@@ -13,14 +13,14 @@ Don't take any benchmark on faith — the only one that matters is your tree,
 your question, your machine:
 
 ```bash
-git clone https://github.com/altpersona/docdex && cd docdex
+git clone https://github.com/altpersona/mddex && cd mddex
 python3 -m venv .venv && .venv/bin/pip install -e .
 
 # index your biggest doc tree, then ask it something you actually needed
 # to know last week:
-.venv/bin/docdex index /path/to/your/docs
-.venv/bin/docdex ask "that thing you spent an hour grepping for" -k 3
-time .venv/bin/docdex ask "another real question"
+.venv/bin/mddex index /path/to/your/docs
+.venv/bin/mddex ask "that thing you spent an hour grepping for" -k 3
+time .venv/bin/mddex ask "another real question"
 ```
 
 Open the files it names. If they're the right files, keep it; if they're
@@ -28,13 +28,13 @@ not, the Limits section below tells you why, honestly.
 
 ## What it does
 
-- `docdex index <dir>` — index (or re-index) one tree; re-indexing replaces
+- `mddex index <dir>` — index (or re-index) one tree; re-indexing replaces
   only that root's rows.
-- `docdex ask "<question>"` — top matches across **every** indexed root,
+- `mddex ask "<question>"` — top matches across **every** indexed root,
   absolute paths out, `-k N` for more.
-- `docdex ask ... --root <dir>` — scope to one root.
-- `docdex roots` / `docdex list` / `docdex forget <dir>` — manage the index.
-- Default index: `~/.cache/docdex/docs.db` (`--db` or `$DOCEX_HOME` moves it).
+- `mddex ask ... --root <dir>` — scope to one root.
+- `mddex roots` / `mddex list` / `mddex forget <dir>` — manage the index.
+- Default index: `~/.cache/mddex/docs.db` (`--db` or `$MDDEX_HOME` moves it).
 
 ## How it ranks
 
@@ -59,6 +59,6 @@ word list, not readable prose. Ranking is Okapi BM25 (k1=1.2, b=0.75).
 ## Provenance & license
 
 The docs-routing concept is inspired by
-[mcptoon](https://github.com/activeing123/mcptoon) (Apache-2.0). docdex is a
+[mcptoon](https://github.com/activeing123/mcptoon) (Apache-2.0). mddex is a
 clean-room implementation sharing no code with it; the ranking is Okapi BM25,
 a long-public algorithm. MIT — see LICENSE.

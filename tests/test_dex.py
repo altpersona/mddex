@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 
-from docdex import dex
+from mddex import dex
 
 
 # ------------------------------------------------------------------- BM25 unit

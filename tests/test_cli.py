@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from docdex.__main__ import main
+from mddex.__main__ import main
 
 
 def test_full_cli_flow(tmp_path, capsys):
@@ -34,7 +34,7 @@ def test_full_cli_flow(tmp_path, capsys):
 def test_ask_without_index_is_clean_error(tmp_path, capsys):
     assert main(["--db", str(tmp_path / "nothing.db"), "ask", "anything"]) == 1
     err = capsys.readouterr().err
-    assert "docdex index" in err
+    assert "mddex index" in err
 
 
 def test_ask_unknown_root_is_clean_error(tmp_path, capsys):
@@ -60,4 +60,4 @@ def test_version_flag(capsys):
         main(["--version"])
     except SystemExit as e:
         assert e.code == 0
-    assert "docdex" in capsys.readouterr().out
+    assert "mddex" in capsys.readouterr().out

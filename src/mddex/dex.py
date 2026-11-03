@@ -1,7 +1,7 @@
 """The dex: Okapi BM25 over heading-derived doc descriptions, in sqlite.
 
 Provenance: the docs-routing concept is inspired by mcptoon (Apache-2.0);
-docdex is a clean-room implementation that shares no code with it. The
+mddex is a clean-room implementation that shares no code with it. The
 ranking algorithm is Okapi BM25, a long-public textbook formula.
 
 Multi-root: many trees can be indexed at once; each root is replaced

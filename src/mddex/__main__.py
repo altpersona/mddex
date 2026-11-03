@@ -1,4 +1,4 @@
-"""docdex CLI: index a tree, ask which file to read.
+"""mddex CLI: index a tree, ask which file to read.
 
 Exit codes: 0 ok, 1 error (unknown root/db, bad dir), 2 usage.
 """
@@ -17,14 +17,14 @@ from . import dex
 def default_db() -> Path:
     import os
 
-    base = os.environ.get("DOCEX_HOME") or os.environ.get("XDG_CACHE_HOME") or "~/.cache"
-    return (Path(base).expanduser() / "docdex" / "docs.db")
+    base = os.environ.get("MDDEX_HOME") or os.environ.get("XDG_CACHE_HOME") or "~/.cache"
+    return (Path(base).expanduser() / "mddex" / "docs.db")
 
 
 def build_parser() -> argparse.ArgumentParser:
-    p = argparse.ArgumentParser(prog="docdex", description="Which file should you read?")
-    p.add_argument("--version", action="version", version=f"docdex {__version__}")
-    p.add_argument("--db", type=Path, default=None, help="index path (default ~/.cache/docdex/docs.db)")
+    p = argparse.ArgumentParser(prog="mddex", description="Which file should you read?")
+    p.add_argument("--version", action="version", version=f"mddex {__version__}")
+    p.add_argument("--db", type=Path, default=None, help="index path (default ~/.cache/mddex/docs.db)")
     sub = p.add_subparsers(dest="cmd", required=True)
 
     i = sub.add_parser("index", help="index (or re-index) one markdown tree")
@@ -75,7 +75,7 @@ def main(argv: list[str] | None = None) -> int:
         except sqlite3.OperationalError:
             known = "".join(f"\n  {r} ({c} docs, {t})" for r, t, c in dex.roots(db)) if db.exists() else ""
             target = f" root {args.root.expanduser().resolve()!r}" if getattr(args, "root", None) else ""
-            print(f"no docdex index at {db}{target}; run `docdex index <dir>` first"
+            print(f"no mddex index at {db}{target}; run `mddex index <dir>` first"
                   f"{known}", file=sys.stderr)
             return 1
         if args.root is not None and not hits:
@@ -83,7 +83,7 @@ def main(argv: list[str] | None = None) -> int:
             # "root not indexed" — the honest separation
             if not any(r == str(args.root.expanduser().resolve()) for r, _t, _c in dex.roots(db)):
                 print(f"root {args.root.expanduser().resolve()} is not indexed"
-                      f" (see `docdex roots`)", file=sys.stderr)
+                      f" (see `mddex roots`)", file=sys.stderr)
                 return 1
         for hit in hits:
             print(f"{hit.score:8.3f}  {hit.path}")
@@ -93,7 +93,7 @@ def main(argv: list[str] | None = None) -> int:
         try:
             rows = dex.roots(db)
         except sqlite3.OperationalError:
-            print(f"no docdex index at {db}; run `docdex index <dir>` first", file=sys.stderr)
+            print(f"no mddex index at {db}; run `mddex index <dir>` first", file=sys.stderr)
             return 1
         for root_id, indexed_at, count in rows:
             print(f"{count:6d}  {root_id}  (indexed {indexed_at})")

@@ -8,10 +8,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-PKG = ROOT / "src" / "docdex"
+PKG = ROOT / "src" / "mddex"
 MODULE_CAP = 400
 TOTAL_CAP = 1000
-ALLOWED = set(sys.stdlib_module_names) | {"__future__", "docdex"}
+ALLOWED = set(sys.stdlib_module_names) | {"__future__", "mddex"}
 
 
 def imports_of(path: Path) -> set[str]:
